@@ -1,43 +1,34 @@
 #!/bin/bash
-apt install git
-apt install python3-pip
+apt install git -y
+apt install python3-pip -y
+apt install python-pip -y
 if [ -d "/root/tools/"  ];then
-        cd ~/tools; wget -c https://golang.org/dl/go1.15.2.linux-amd64.tar.gz
-tar -C /usr/local -xvzf go1.15.2.linux-amd64.tar.gz
-echo "setting golang environment variables"
-export $GOPATH="/root/go"
-export $GOROOT="/usr/local/go"
-echo "INSTALLING PYTHON MODULES FROM SCRIPTS LOCATED AT TOOLS"
-if [ -d "/root/tools" ]; then
+mkdir -p ~/tools
+echo "recon tools"
 cd ~/tools
-grep -ri "import" *.py |awk -F ":" '{print $2}' | awk -F " " '{print $2}' | sort -u | sort --uniq | grep -v error | $fi
-
-echo "add shodan keys by shodan init <api key>"
-echo "configure censys at /tools/python_scripts/censys-python"
-echo "IMPORTING GOLANG TOOLS from tomnomnom, projectdiscovery and so on"
-echo "httprobe"
-go get github.com/tomnomnom/httprobe
-echo "gf"
-go get github.com/tomnomnom/gf~
-echo "qsreplace"                                                                                                     
-go get github.com/tomnomnom/qsreplace
-echo "hacks"
-go get github.com/tomnomnom/hacks
-echo "meg"
-go get github.com/tomnomnom/meg
-echo "anew"
-go get github.com/tomnomnom/anew
-echo "ffuf"
-go get github.com/ffuf/ffuf
-echo "nuclei"
-go get github.com/projectdiscovery/nuclei
-echo "httpx"
-go get github.com/projectdiscovery/httpx
-echo "hakrawler"
-go get github.com/hakluke/hakrawler
-echo "hakrevdns"
-go get github.com/hakluke/hakrevdns
+git clone https://github.com/whitehat92/opensubs
+git clone https://github.com/achillean/shodan-python
+wget https://github.com/tomnomnom/httprobe/releases/download/v0.1.2/httprobe-linux-amd64-0.1.2.tgz
+tar -xzf httprobe-linux-amd64-0.1.2.tgz
+mv httprobe /usr/bin/
+git clone github.com/tomnomnom/gf
+go build main.go
+mv main /usr/bin/gf                                                                                                     
+wget https://github.com/tomnomnom/qsreplace/releases/download/v0.0.1/qsreplace-linux-amd64-0.0.1.tgz
+git clone github.com/tomnomnom/hacks
+wget https://github.com/tomnomnom/meg/releases/download/v0.2.4/meg-linux-amd64-0.2.4.tgz
+git clone github.com/tomnomnom/anew
+go build main.go
+mv main /usr/bin/anew
+wget https://github.com/ffuf/ffuf/releases/download/v1.1.0/ffuf_1.1.0_linux_amd64.tar.gz
+tar -xzf ffuf_1.1.0_linux_amd64.tar.gz
+mv ffuf /usr/bin/ffuf
+wget https://github.com/projectdiscovery/httpx/releases/download/v1.0.3/httpx_1.0.3_linux_amd64.tar.gz
+tar -xzf httpx_1.0.3_linux_amd64.tar.gz
+mv httpx /usr/bin/
 echo "gau"
-go get github.com/lc/gau
-fi
+wget https://github.com/lc/gau/releases/download/v1.0.7/gau_1.0.7_linux_amd64.tar.gz
+tar -xzf gau_1.0.7_linux_amd64.tar.gz
+mv gau /usr/bin/
+echo "add shodan keys by shodan init <api key>"
 fi

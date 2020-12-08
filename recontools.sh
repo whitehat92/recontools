@@ -39,3 +39,5 @@ echo "hakrevdns"
 go get github.com/hakluke/hakrevdns
 echo "gau"
 go get github.com/lc/gau
+fi
+fi
